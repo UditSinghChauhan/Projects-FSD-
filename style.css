@@ -1,0 +1,72 @@
+/* Global Styles */
+body {
+  background-color: #0d1117;
+  color: #e6e8eb;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #00c896, #2b3945);
+  padding: 100px 0;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.hero-section h1, .hero-section p {
+  color: #fff;
+}
+
+.text-shadow {
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Details Header */
+.details-header {
+  background: linear-gradient(135deg, #1f1f1f, #292929);
+  padding: 50px 0;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.details-header h1 {
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+/* Card Styles */
+.card {
+  background: linear-gradient(145deg, #1e1e1e, #292929);
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+/* Buttons with Gradient Effect */
+.gradient-button {
+  background: linear-gradient(145deg, #00c896, #2b3945);
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.gradient-button:hover {
+  transform: scale(1.1);
+}
+
+/* Search Bar */
+.search-bar {
+  text-align: center;
+}
+
+/* Chart Styles */
+canvas {
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+  background-color: #212529;
+}
