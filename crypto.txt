@@ -1,0 +1,8 @@
+Crypto World is a sleek and modern platform for exploring trending cryptocurrencies and market trends.
+Users can view real-time prices, detailed stats, and historical price charts for their favorite cryptocurrencies.
+The platform integrates data from the CoinGecko API to ensure accurate and up-to-date information.
+Each cryptocurrency includes a direct link to trusted platforms for buying or selling assets.
+The site’s futuristic design, smooth animations, and responsive layout appeal to blockchain enthusiasts.
+Built using HTML, CSS, JavaScript, and Bootstrap, the platform is fast, interactive, and visually captivating.
+The intuitive user interface ensures a seamless browsing experience across devices.
+Perfect for both beginners and advanced crypto traders, the platform bridges knowledge and action effortlessly.
