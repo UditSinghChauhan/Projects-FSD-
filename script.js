@@ -1,20 +1,21 @@
 const apiBase = "https://api.coingecko.com/api/v3";
 
+// Fetch and display trending cryptocurrencies on the homepage
 async function fetchTrendingCryptos() {
-  const loader = document.getElementById('loader');
-  loader.style.display = 'block';
-  const search = document.getElementById('search');
+  const loader = document.getElementById("loader");
+  loader.style.display = "block";
+  const search = document.getElementById("search");
 
   try {
     const response = await fetch(`${apiBase}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=12`);
     const cryptos = await response.json();
-    const cryptoList = document.getElementById('crypto-list');
+    const cryptoList = document.getElementById("crypto-list");
 
     function renderCryptos(cryptos) {
-      cryptoList.innerHTML = '';
-      cryptos.forEach(crypto => {
-        const col = document.createElement('div');
-        col.className = 'col-md-4';
+      cryptoList.innerHTML = "";
+      cryptos.forEach((crypto) => {
+        const col = document.createElement("div");
+        col.className = "col-md-4";
         col.innerHTML = `
           <div class="card p-3">
             <h5>${crypto.name}</h5>
@@ -28,8 +29,8 @@ async function fetchTrendingCryptos() {
 
     renderCryptos(cryptos);
 
-    search.addEventListener('input', () => {
-      const filtered = cryptos.filter(crypto =>
+    search.addEventListener("input", () => {
+      const filtered = cryptos.filter((crypto) =>
         crypto.name.toLowerCase().includes(search.value.toLowerCase())
       );
       renderCryptos(filtered);
@@ -37,57 +38,65 @@ async function fetchTrendingCryptos() {
   } catch (error) {
     console.error("Error fetching cryptocurrencies:", error);
   } finally {
-    loader.style.display = 'none';
+    loader.style.display = "none";
   }
 }
 
+// Fetch and display details for a single cryptocurrency
 async function fetchCryptoDetails() {
   const params = new URLSearchParams(window.location.search);
-  const cryptoId = params.get('crypto');
+  const cryptoId = params.get("crypto");
 
   if (!cryptoId) return;
 
   try {
     const [detailsResponse, historyResponse] = await Promise.all([
       fetch(`${apiBase}/coins/${cryptoId}`),
-      fetch(`${apiBase}/coins/${cryptoId}/market_chart?vs_currency=usd&days=7`)
+      fetch(`${apiBase}/coins/${cryptoId}/market_chart?vs_currency=usd&days=7`),
     ]);
 
     const details = await detailsResponse.json();
     const history = await historyResponse.json();
 
-    document.getElementById('crypto-name').textContent = details.name;
-    document.getElementById('crypto-image').src = details.image.large;
-    document.getElementById('crypto-description').textContent = details.description.en || "No description available.";
-    document.getElementById('crypto-price').textContent = details.market_data.current_price.usd.toFixed(2);
-    document.getElementById('crypto-binance').href = `https://www.binance.com/en/trade/${details.symbol}_USDT`;
-    document.getElementById('crypto-coinbase').href = `https://www.coinbase.com/price/${details.id}`;
-    document.getElementById('crypto-kraken').href = `https://www.kraken.com/prices/${details.id}`;
+    document.getElementById("crypto-name").textContent = details.name;
+    document.getElementById("crypto-symbol").textContent = `(${details.symbol.toUpperCase()})`;
+    document.getElementById("crypto-image").src = details.image.large;
+    document.getElementById("crypto-description").textContent = details.description.en || "No description available.";
+    document.getElementById("crypto-price").textContent = details.market_data.current_price.usd.toFixed(2);
+    document.getElementById("crypto-change").textContent = `${details.market_data.price_change_percentage_24h.toFixed(2)}%`;
+    document.getElementById("crypto-market-cap").textContent = `$${details.market_data.market_cap.usd.toLocaleString()}`;
+    document.getElementById("crypto-volume").textContent = `$${details.market_data.total_volume.usd.toLocaleString()}`;
+    document.getElementById("crypto-supply").textContent = `${details.market_data.circulating_supply.toLocaleString()} ${details.symbol.toUpperCase()}`;
+    document.getElementById("crypto-binance").href = `https://www.binance.com/en/trade/${details.symbol}_USDT`;
+    document.getElementById("crypto-coinbase").href = `https://www.coinbase.com/price/${details.id}`;
+    document.getElementById("crypto-kraken").href = `https://www.kraken.com/prices/${details.id}`;
 
     const prices = history.prices.map(([time, price]) => ({
       time: new Date(time).toLocaleDateString(),
       price,
     }));
-
     renderChart(prices);
   } catch (error) {
     console.error("Error fetching cryptocurrency details:", error);
   }
 }
 
+// Function to render the price history chart
 function renderChart(prices) {
-  const ctx = document.getElementById('history-chart').getContext('2d');
+  const ctx = document.getElementById("history-chart").getContext("2d");
   new Chart(ctx, {
-    type: 'line',
+    type: "line",
     data: {
-      labels: prices.map(p => p.time),
-      datasets: [{
-        label: 'Price (USD)',
-        data: prices.map(p => p.price),
-        borderColor: '#00c896',
-        backgroundColor: 'rgba(0, 200, 150, 0.2)',
-        fill: true,
-      }],
+      labels: prices.map((p) => p.time),
+      datasets: [
+        {
+          label: "Price (USD)",
+          data: prices.map((p) => p.price),
+          borderColor: "#00c896",
+          backgroundColor: "rgba(0, 200, 150, 0.2)",
+          fill: true,
+        },
+      ],
     },
     options: {
       responsive: true,
@@ -95,12 +104,13 @@ function renderChart(prices) {
         legend: { display: true },
       },
       scales: {
-        x: { title: { display: true, text: 'Date' } },
-        y: { title: { display: true, text: 'Price (USD)' } },
+        x: { title: { display: true, text: "Date" } },
+        y: { title: { display: true, text: "Price (USD)" } },
       },
     },
   });
 }
 
-if (document.getElementById('crypto-list')) fetchTrendingCryptos();
-if (document.getElementById('crypto-name')) fetchCryptoDetails();
+// Fetch and render the cryptos when the page loads
+if (document.getElementById("crypto-list")) fetchTrendingCryptos();
+if (document.getElementById("crypto-name")) fetchCryptoDetails();

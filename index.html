@@ -7,23 +7,26 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Hero Section with Visual Effects -->
+  <!-- Hero Section -->
   <header class="hero-section">
     <div class="container text-center text-light">
-      <h1 class="display-4 text-shadow" data-aos="fade-down">Welcome to Crypto World</h1>
-      <p class="lead text-shadow" data-aos="fade-up">Your gateway to the cryptocurrency market.</p>
-      <a href="#crypto-list" class="btn btn-primary btn-lg gradient-button" data-aos="zoom-in">Explore Now</a>
+      <h1 class="display-4 text-shadow" data-aos="fade-down" data-aos-duration="1200">Welcome to Crypto World</h1>
+      <p class="lead text-shadow" data-aos="fade-up" data-aos-duration="1500">Your gateway to the cryptocurrency market.</p>
+      <a href="#crypto-list" class="btn btn-primary btn-lg gradient-button" data-aos="zoom-in" data-aos-duration="1800">Explore Now</a>
     </div>
   </header>
 
+  <!-- Search Bar -->
   <main class="container mt-5">
     <div class="search-bar mb-4">
-      <input type="text" id="search" class="form-control" placeholder="Search for a cryptocurrency...">
+      <input type="text" id="search" class="form-control shadow-lg" placeholder="Search for a cryptocurrency..." data-aos="fade-up" data-aos-duration="2000">
     </div>
 
-    <h2 class="text-center mb-4 text-primary" data-aos="fade-right">Trending Cryptocurrencies</h2>
+    <!-- Trending Section -->
+    <h2 class="text-center mb-4 text-primary" data-aos="fade-right" data-aos-duration="1600">Trending Cryptocurrencies</h2>
     <div id="loader" class="text-center">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -32,10 +35,12 @@
     <div id="crypto-list" class="row g-4" data-aos="fade-up"></div>
   </main>
 
+  <!-- Footer -->
   <footer class="text-center py-3 bg-dark text-light mt-5">
     <p>&copy; 2025 Crypto World | Powered by CoinGecko</p>
   </footer>
 
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="script.js"></script>
   <script>
